@@ -8,6 +8,10 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req,res)=>{
-    res.send("Server is Running");
-})
+app.get("/", (req, res) => {
+  res.send("Flight Booking Server is Running");
+});
+
+app.listen(port, () => {
+  console.log(`Flight Booking server is running on Port: ${port}`);
+});
