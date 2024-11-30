@@ -18,6 +18,8 @@ const mongoURI = process.env.MONGO_URI;
 const User = require("./models/User");
 const Flight = require("./models/Flight");
 const Booking = require("./models/Booking");
+
+// ----------------- Routes Import -----------------
 const authRoutes = require("./routes/authRoutes");
 const flightRoutes = require("./routes/flightRoutes");
 
@@ -31,11 +33,12 @@ mongoose
     console.error("MongoDB connection error:", err);
   });
 
-// --------------------- Routes --------------------
-// ----------------------- User Reg and Login routes --------------------
+// --------------------- APIs --------------------
+
+// ----------------------- Authentication Related  APIs -----------------------
 app.use("/api/auth", authRoutes);
 
-// ----------------------- Flights APIs -----------------------
+// ----------------------- Flights Related APIs ------------------------
 app.use("/api/flights", flightRoutes);
 
 app.get("/", (req, res) => {
