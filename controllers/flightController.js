@@ -70,15 +70,26 @@ const deleteFlight = async (req, res) => {
 // ------------------------ Search for flights based on criteria --------------------------
 const searchFlights = async (req, res) => {
   const { origin, destination } = req.query;
+  console.log("Search API Hit:", req.query); // Debug incoming data
 
   try {
     const query = {};
-    if (origin) query.origin = origin;
-    if (destination) query.destination = destination;
+    if (origin) query.origin = { $regex: new RegExp(origin, "i") };
+    if (destination)
+      query.destination = { $regex: new RegExp(destination, "i") };
+
     const flights = await Flight.find(query);
+
+    if (flights.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No flights found matching your criteria" });
+    }
+
     res.json(flights);
   } catch (error) {
-    res.status(500).json({ message: "Server error", error });
+    console.error("Error fetching flights:", error.message);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
