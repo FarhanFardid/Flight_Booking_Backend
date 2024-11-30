@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 // User Registration
 const registerUser = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password,role } = req.body;
     console.log("Register Api Hit");
     console.log(req.body);
     const existingUser = await User.findOne({ email });
@@ -19,6 +19,7 @@ const registerUser = async (req, res) => {
       username,
       email,
       password: hashedPassword,
+      role
     });
 
     await newUser.save();
