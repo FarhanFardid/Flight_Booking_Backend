@@ -26,9 +26,12 @@ const getFlightById = async (req, res) => {
 const addFlight = async (req, res) => {
   try {
     const flight = new Flight(req.body);
+    console.log("Flight Add API Hit");
+    console.log(req.body);
     await flight.save();
     res.status(201).json(flight);
   } catch (error) {
+    console.error("Error saving flight:", error);
     res.status(500).json({ message: "Server error", error });
   }
 };
