@@ -3,6 +3,7 @@ const Flight = require("../models/Flight");
 // ---------------- Get all flights -------------------------
 const getFlights = async (req, res) => {
   try {
+    console.log("Flight Get Api Hit");
     const flights = await Flight.find();
     res.json(flights);
   } catch (error) {
