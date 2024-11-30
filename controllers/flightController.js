@@ -14,6 +14,7 @@ const getFlights = async (req, res) => {
 // -------------------Get a specific flight by ID ------------------------
 const getFlightById = async (req, res) => {
   try {
+    console.log("Specific Flight Get Api Hit");
     const flight = await Flight.findById(req.params.id);
     if (!flight) {
       return res.status(404).json({ message: "Flight not found" });
@@ -40,6 +41,7 @@ const addFlight = async (req, res) => {
 // ------------------------ Update flight details -----------------------
 const updateFlight = async (req, res) => {
   try {
+    console.log("Flight Update Api Hit");
     const flight = await Flight.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
@@ -67,13 +69,12 @@ const deleteFlight = async (req, res) => {
 
 // ------------------------ Search for flights based on criteria --------------------------
 const searchFlights = async (req, res) => {
-  const { origin, destination, date } = req.query;
+  const { origin, destination } = req.query;
 
   try {
     const query = {};
     if (origin) query.origin = origin;
     if (destination) query.destination = destination;
-    if (date) query.date = new Date(date);
     const flights = await Flight.find(query);
     res.json(flights);
   } catch (error) {
