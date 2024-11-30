@@ -2,24 +2,23 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-// User Registration
+// ------------------------ User Registration ----------------------
 const registerUser = async (req, res) => {
   try {
-    const { username, email, password,role } = req.body;
+    const { username, email, password, role } = req.body;
     console.log("Register Api Hit");
     console.log(req.body);
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(400).json({ message: "User already exists" });
 
-    // password hashing using bcrypt
+    // ------------------------- Password hashing using bcrypt ------------------------
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = new User({
       username,
       email,
       password: hashedPassword,
-      role
+      role,
     });
 
     await newUser.save();
@@ -30,7 +29,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-// User Login
+// ----------------------------- User Login ----------------------------
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -44,7 +43,7 @@ const loginUser = async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Invalid email or password" });
 
-    // Create and return JWT
+    // ------------------  Create and send jwt -----------------
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
