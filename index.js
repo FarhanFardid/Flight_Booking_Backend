@@ -13,6 +13,11 @@ app.use(express.json());
 // MongoDb connection string from .env
 const mongoURI = process.env.MONGO_URI;
 
+// Schema Models
+const User = require('./models/User');
+const Flight = require('./models/Flight');
+const Booking = require('./models/Booking');
+
 // Connection to MongoDB using Mongoose
 mongoose
   .connect(mongoURI)
