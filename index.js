@@ -19,6 +19,7 @@ const User = require("./models/User");
 const Flight = require("./models/Flight");
 const Booking = require("./models/Booking");
 const authRoutes = require("./routes/authRoutes");
+const flightRoutes = require("./routes/flightRoutes");
 
 // ----------------------- Connection to MongoDB using Mongoose -----------------------
 mongoose
@@ -33,6 +34,9 @@ mongoose
 // --------------------- Routes --------------------
 // ----------------------- User Reg and Login routes --------------------
 app.use("/api/auth", authRoutes);
+
+// ----------------------- Flights APIs -----------------------
+app.use("/api/flights", flightRoutes);
 
 app.get("/", (req, res) => {
   res.send("Flight Booking Server is Running");
