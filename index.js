@@ -14,14 +14,10 @@ app.use(express.json());
 //-------------- MongoDb connection string from .env ----------------------
 const mongoURI = process.env.MONGO_URI;
 
-//------------------- Schema Models -------------------------------
-const User = require("./models/User");
-const Flight = require("./models/Flight");
-const Booking = require("./models/Booking");
-
 // ----------------- Routes Import -----------------
 const authRoutes = require("./routes/authRoutes");
 const flightRoutes = require("./routes/flightRoutes");
+const bookingRoutes = require("./routes/bookingRoutes.js");
 
 // ----------------------- Connection to MongoDB using Mongoose -----------------------
 mongoose
@@ -40,6 +36,9 @@ app.use("/api/auth", authRoutes);
 
 // ----------------------- Flights Related APIs ------------------------
 app.use("/api/flights", flightRoutes);
+
+// ----------------------- Bookings Related APIs ------------------------
+app.use("/api/bookings", bookingRoutes);
 
 app.get("/", (req, res) => {
   res.send("Flight Booking Server is Running");
