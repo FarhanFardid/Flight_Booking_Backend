@@ -58,11 +58,7 @@ const getAllBookings = async (req, res) => {
   try {
     console.log("Get All Bookings API Hit");
 
-    if (!req.user || req.user.role !== "admin") {
-      return res.status(403).json({ message: "Access denied: Admins only" });
-    }
-
-    const bookings = await Booking.find().populate("userId flightId");
+    const bookings = await Booking.find();
     res.json(bookings);
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
@@ -74,10 +70,10 @@ const updateBooking = async (req, res) => {
   try {
     console.log("Update Booking API Hit");
 
-    // Ensure only admins can access this endpoint
-    if (!req.user || req.user.role !== "admin") {
-      return res.status(403).json({ message: "Access denied: Admins only" });
-    }
+    // // Ensure only admins can access this endpoint
+    // if (!req.user || req.user.role !== "admin") {
+    //   return res.status(403).json({ message: "Access denied: Admins only" });
+    // }
 
     const { id } = req.params;
     const updatedBooking = await Booking.findByIdAndUpdate(id, req.body, {
@@ -98,10 +94,10 @@ const deleteBooking = async (req, res) => {
   try {
     console.log("Delete Booking API Hit");
 
-    // Ensure only admins can access this endpoint
-    if (!req.user || req.user.role !== "admin") {
-      return res.status(403).json({ message: "Access denied: Admins only" });
-    }
+    // // Ensure only admins can access this endpoint
+    // if (!req.user || req.user.role !== "admin") {
+    //   return res.status(403).json({ message: "Access denied: Admins only" });
+    // }
 
     const { id } = req.params;
     const deletedBooking = await Booking.findByIdAndDelete(id);
