@@ -2,6 +2,20 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+// -------------------Get a specific user by Id ------------------------
+const getUserById = async (req, res) => {
+  try {
+    console.log("Specific User Get Api Hit");
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
+
 // ------------------------ User Registration ----------------------
 const registerUser = async (req, res) => {
   try {
@@ -55,4 +69,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser, loginUser, getUserById };
