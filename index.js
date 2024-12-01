@@ -31,7 +31,7 @@ mongoose
 
 // --------------------- APIs --------------------
 
-// ----------------------- Authentication Related  APIs -----------------------
+// ----------------------- Authentication & User Info  Related  APIs -----------------------
 app.use("/api/auth", authRoutes);
 
 // ----------------------- Flights Related APIs ------------------------

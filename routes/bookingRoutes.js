@@ -10,13 +10,13 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// --------------------- Create new booking Routes---------------------
+// --------------------- New booking create Route---------------------
 router.post("/", createBooking);
 
-// ---------------- Retrieve all bookings of specific user  Route--------------------
+// ---------------- User specific booking get Route--------------------
 router.get("/user/:id", getUserBookings);
 
-// ----------------------- Retrieve all bookings Route -----------------------
+// ----------------------- All bookings get Route -----------------------
 router.get(
   "/",
   authMiddleware,
@@ -42,7 +42,7 @@ router.put(
   updateBooking
 );
 
-// ------------------------ Delete a booking Route -----------------------
+// ------------------------ Booking Delete Route -----------------------
 router.delete(
   "/:id",
   authMiddleware,

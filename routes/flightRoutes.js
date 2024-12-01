@@ -14,11 +14,8 @@ const router = express.Router();
 // ----------------------- Get all flights Route -------------------------
 router.get("/", getFlights);
 
-// -------------------- Get specific flight details Route ------------------------
+// -------------------- Get specific flight info Route ------------------------
 router.get("/:id", getFlightById);
-
-// ----------------------- Get flights on criteria Route -------------------------
-router.get("/search", searchFlights);
 
 // ------------------------ Post new flight Route ----------------------
 router.post(
@@ -33,7 +30,7 @@ router.post(
   addFlight
 );
 
-// ---------------------- Put flight details Route ---------------------
+// ---------------------- Update flight details Route ---------------------
 router.put(
   "/:id",
   authMiddleware,
@@ -46,7 +43,7 @@ router.put(
   updateFlight
 );
 
-// -------------------- Delete flight Route --------------------
+// -------------------- Flight delete Route --------------------
 router.delete(
   "/:id",
   authMiddleware,
@@ -58,5 +55,8 @@ router.delete(
   },
   deleteFlight
 );
+
+// ----------------------- Flights search Route -------------------------
+router.get("/search", searchFlights);
 
 module.exports = router;

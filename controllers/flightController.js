@@ -3,7 +3,7 @@ const Flight = require("../models/Flight");
 // ---------------- Get all flights -------------------------
 const getFlights = async (req, res) => {
   try {
-    console.log("Flight Get Api Hit");
+    // console.log("Flight Get Api Hit");
     const flights = await Flight.find();
     res.json(flights);
   } catch (error) {
@@ -11,10 +11,10 @@ const getFlights = async (req, res) => {
   }
 };
 
-// -------------------Get a specific flight by ID ------------------------
+// -------------------Get a specific flight info ------------------------
 const getFlightById = async (req, res) => {
   try {
-    console.log("Specific Flight Get Api Hit");
+    // console.log("Specific Flight Get Api Hit");
     const flight = await Flight.findById(req.params.id);
     if (!flight) {
       return res.status(404).json({ message: "Flight not found" });
@@ -24,12 +24,12 @@ const getFlightById = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
-// ----------------------- Add  new flight ------------------------
+// ----------------------- Create new  flight ------------------------
 const addFlight = async (req, res) => {
   try {
     const flight = new Flight(req.body);
-    console.log("Flight Add API Hit");
-    console.log(req.body);
+    // console.log("Flight Add API Hit");
+    // console.log(req.body);
     await flight.save();
     res.status(201).json(flight);
   } catch (error) {
@@ -41,7 +41,7 @@ const addFlight = async (req, res) => {
 // ------------------------ Update flight details -----------------------
 const updateFlight = async (req, res) => {
   try {
-    console.log("Flight Update Api Hit");
+    // console.log("Flight Update Api Hit");
     const flight = await Flight.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
@@ -70,7 +70,7 @@ const deleteFlight = async (req, res) => {
 // ------------------------ Search for flights based on criteria --------------------------
 const searchFlights = async (req, res) => {
   const { origin, destination } = req.query;
-  console.log("Search API Hit:", req.query); // Debug incoming data
+  // console.log("Search API Hit:", req.query);
 
   try {
     const query = {};

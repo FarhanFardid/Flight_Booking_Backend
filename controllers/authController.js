@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 // -------------------Get a specific user by Id ------------------------
 const getUserById = async (req, res) => {
   try {
-    console.log("Specific User Get Api Hit");
+    // console.log("Specific User Get Api Hit");
     const user = await User.findById(req.params.id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -16,6 +16,21 @@ const getUserById = async (req, res) => {
   }
 };
 
+// ------------------------ Update User details -----------------------
+const updateUserById = async (req, res) => {
+  try {
+    console.log("User Update Api Hit");
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
 // ------------------------ User Registration ----------------------
 const registerUser = async (req, res) => {
   try {
@@ -69,4 +84,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, getUserById };
+module.exports = { registerUser, loginUser, getUserById, updateUserById };
