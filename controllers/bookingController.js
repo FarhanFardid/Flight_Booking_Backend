@@ -37,10 +37,10 @@ const createBooking = async (req, res) => {
 // ---------------- Retrieve all bookings for  specific user -----------------
 const getUserBookings = async (req, res) => {
   try {
-    console.log("Get User Bookings API Hit");
     const { id } = req.params;
+    console.log("Fetching bookings for user:", id);
 
-    const bookings = await Booking.find({ userId: id }).populate("flightId");
+    const bookings = await Booking.find({ userId: id });
     if (bookings.length === 0) {
       return res
         .status(404)
@@ -48,6 +48,7 @@ const getUserBookings = async (req, res) => {
     }
     res.json(bookings);
   } catch (error) {
+    console.error("Server Error:", error);
     res.status(500).json({ message: "Server error", error });
   }
 };
