@@ -15,4 +15,5 @@ router.post("/login", loginUser);
 
 // -------------- Specific User Get Route ---------------
 router.get("/user/:id", getUserById);
+
 module.exports = router;
